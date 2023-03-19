@@ -21,12 +21,6 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true, 
   useUnifiedTopology: true,
 });
-/*
-mongoose.connect('mongodb://127.0.0.1:27017/cfDB', {
-  useNewUrlParser: true, 
-  useUnifiedTopology: true,
-});
-*/
 
 //Body Parser
 app.use(bodyParser.json());
@@ -101,7 +95,7 @@ app.get('/directors/:Name', passport.authenticate('jwt', { session: false }), (r
 });
 
 //POST New User
-app.post('/users', passport.authenticate('jwt', { session: false }),
+app.post('/users',
 [
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
