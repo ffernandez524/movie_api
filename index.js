@@ -106,7 +106,7 @@ app.post('/users', passport.authenticate('jwt', { session: false }),
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
-  
+
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
   .then((user) => {
@@ -231,6 +231,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 // listen for requests
-app.listen(8080, () => {
-  console.log('Cinenotes listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+  console.log('Cinenotes listening on port ' + port);
 });
